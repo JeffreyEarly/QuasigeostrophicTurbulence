@@ -32,6 +32,10 @@ int main(int argc, const char * argv[]) {
 		qg.thermalDampingFraction = 0.0;
 		qg.frictionalDampingFraction = 2.0;
 		qg.forcingDecorrelationTime = HUGE_VAL;
+        
+        qg.outputFile = [[NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"QGTurbulenceTest.netcdf"];
+        
+        
 	}
     return 0;
 }
