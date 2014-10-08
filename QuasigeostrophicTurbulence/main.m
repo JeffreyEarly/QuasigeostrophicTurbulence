@@ -13,7 +13,7 @@
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 		GLFloat domainWidth = 100; // km, beta = 611*10 km
-		NSUInteger nPoints = 128;
+		NSUInteger nPoints = 256;
 		NSUInteger aspectRatio = 1;
 		
 		GLDimension *xDim = [[GLDimension alloc] initDimensionWithGrid: kGLPeriodicGrid nPoints:nPoints domainMin:-domainWidth/2.0 length:domainWidth];
@@ -29,17 +29,18 @@ int main(int argc, const char * argv[]) {
 		qg.shouldForce = YES;
 		qg.forcingFraction = 16;
 		qg.forcingWidth = 1;
+        qg.f_zeta = 10;
+        qg.forcingDecorrelationTime = HUGE_VAL;
 		qg.thermalDampingFraction = 0.0;
 		qg.frictionalDampingFraction = 2.0;
-		qg.forcingDecorrelationTime = HUGE_VAL;
-        qg.f_zeta = 1;
         
-        qg.outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest.netcdf"];
+        
+        qg.outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest.nc"];
         qg.shouldAdvectFloats = NO;
         qg.shouldAdvectTracer = NO;
-        qg.outputInterval = 86400;
+        qg.outputInterval = 10*86400.;
         
-        [qg runSimulationToTime: 10*86400];
+        [qg runSimulationToTime: 100*86400];
 	}
     return 0;
 }
