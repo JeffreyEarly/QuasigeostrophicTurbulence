@@ -12,6 +12,9 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
+		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest.nc"];
+		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_2.nc"];
+		
 		GLFloat domainWidth = 100; // km, beta = 611*10 km
 		NSUInteger nPoints = 256;
 		NSUInteger aspectRatio = 1;
@@ -22,11 +25,12 @@ int main(int argc, const char * argv[]) {
 		yDim.name = @"y";
 		
 		GLEquation *equation = [[GLEquation alloc] init];
-		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithDimensions: @[xDim, yDim] depth: 0.80 latitude: 24.0 equation: equation];
+		//Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithDimensions: @[xDim, yDim] depth: 0.80 latitude: 24.0 equation: equation];
+		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartFile resolutionDoubling:NO equation: equation];
 		qg.shouldUseBeta = NO;
 		qg.shouldUseSVV = YES;
 		qg.shouldAntiAlias = NO;
-		qg.shouldForce = YES;
+		qg.shouldForce = NO;
 		qg.forcingFraction = 16;
 		qg.forcingWidth = 1;
         qg.f_zeta = 10;
@@ -35,12 +39,12 @@ int main(int argc, const char * argv[]) {
 		qg.frictionalDampingFraction = 2.0;
         
         
-        qg.outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest.nc"];
+        qg.outputFile = outputFile;
         qg.shouldAdvectFloats = NO;
         qg.shouldAdvectTracer = NO;
         qg.outputInterval = 10*86400.;
         
-        [qg runSimulationToTime: 100*86400];
+        [qg runSimulationToTime: 500*86400];
 	}
     return 0;
 }
