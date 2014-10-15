@@ -12,8 +12,8 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_2.nc"];
-		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_3.nc"];
+		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_1.nc"];
+		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_2.nc"];
 		
 		GLFloat domainWidth = 100; // m
 		NSUInteger nPoints = 256;
@@ -25,12 +25,12 @@ int main(int argc, const char * argv[]) {
 		yDim.name = @"y";
 		
 		GLEquation *equation = [[GLEquation alloc] init];
-		//Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithDimensions: @[xDim, yDim] depth: 0.80 latitude: 24.0 equation: equation];
-		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartFile resolutionDoubling:NO equation: equation];
+		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithDimensions: @[xDim, yDim] depth: 0.80 latitude: 24.0 equation: equation];
+		//Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartFile resolutionDoubling:YES equation: equation];
 		qg.shouldUseBeta = NO;
 		qg.shouldUseSVV = YES;
 		qg.shouldAntiAlias = NO;
-		qg.shouldForce = NO;
+		qg.shouldForce = YES;
 		qg.forcingFraction = 16;
 		qg.forcingWidth = 1;
         qg.f_zeta = 10;
