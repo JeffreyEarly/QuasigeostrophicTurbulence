@@ -12,10 +12,10 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest.nc"];
-		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_2.nc"];
+		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_2.nc"];
+		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulenceTest_3.nc"];
 		
-		GLFloat domainWidth = 100; // km, beta = 611*10 km
+		GLFloat domainWidth = 100; // m
 		NSUInteger nPoints = 256;
 		NSUInteger aspectRatio = 1;
 		

@@ -1,16 +1,11 @@
-day = 2001;
+day = 20000;
 
+addpath('/Volumes/Music/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Documents/Data/Anisotropic Run for Adam/QGBetaPlaneTurbulenceFloats_experiment_04.nc';
-file = '/Users/jearly/Documents/Data/ForcedDissipativeQGTurbulence/QGFPlaneTurbulence_256_experiment_02.nc';
-file = '/Volumes/Data/ForcedDissipativeQGTurbulence/QGFPlaneTurbulence_experiment_02.nc'
-file = '/Users/jearly/Desktop/QGTurbulenceTest.nc';
-output = '/Users/jearly/Dropbox/Documents/Projects/ForcedDissipativeQGTurbulence/Experiment_02_images/FourPanel.png'
-% file = '/Users/jearly/Dropbox/Documents/Projects/AnisotropicDiffusivity/QGBetaPlaneTurbulence_256_large_forcing_restarted.nc';
+file = '/Users/jearly/Desktop/QGTurbulenceTest_3.nc';
+output = '/Users/jearly/Desktop/FourPanel.png';
 
-x = ncread(file, 'x');
-y = ncread(file, 'y');
-t = ncread(file, 'time');
+[x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');
 
 height_scale = ncreadatt(file, '/', 'height_scale');
 time_scale = ncreadatt(file, '/', 'time_scale');
@@ -26,19 +21,11 @@ latitude = ncreadatt(file, '/', 'latitude');
 k_max = ncreadatt(file, '/', 'max_resolved_wavenumber');
 r = ncreadatt(file, '/', 'r');
 
-% k_r = 0;
-% r = 0;
-
 if (k_alpha > k_r)
 	k_damp = k_alpha;
 else
 	k_damp = k_r;
 end
-
-g = 9.81;
-f0 = 2 * 7.2921E-5 * sin( latitude*pi/180. );
-R = 6.371e6;
-beta = 2 * 7.2921E-5 * cos( latitude*pi/180. ) / R;
 
 t = t/86400;
 
@@ -47,9 +34,10 @@ timeIndex = find( t <= day, 1, 'last');
 [u, v, rv, ssh, sshFD, k, l] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'k', 'l');
 
 
-figure('Position', [50 50 1000 1000])
-set(gcf,'PaperPositionMode','auto')
-set(gcf, 'Color', 'w');
+theFigure = figure('Position', [50 50 1000 1000]);
+theFigure.PaperPositionMode = 'auto';
+theFigure.Color = 'white';
+
 
 %%%%%%%%%%%%%%%%%%%%%
 %
@@ -57,11 +45,14 @@ set(gcf, 'Color', 'w');
 %
 %%%%%%%%%%%%%%%%%%%%%%
 
-subplot(2,2,1)
-pcolor(x, y, ssh(:,:)), axis equal tight, shading interp
-title(sprintf('SSH'))
-set( gca, 'xtick', [])
-set( gca, 'ytick', [])
+sshPlot = subplot(2,2,1);
+theSSH = pcolor(x, y, ssh);
+theSSH.EdgeColor = 'none';
+axis(sshPlot, 'equal', 'tight');
+sshPlot.Title.String = 'SSH';
+sshPlot.XTick = [];
+sshPlot.YTick = [];
+colormap(sshPlot,gray(1024))
 
 %%%%%%%%%%%%%%%%%%%%%
 %
@@ -69,12 +60,14 @@ set( gca, 'ytick', [])
 %
 %%%%%%%%%%%%%%%%%%%%%%
 
-subplot(2,2,2)
-pcolor(x, y, rv(:,:,end)), axis equal tight, shading interp
-title(sprintf('Relative vorticity'))
-set( gca, 'xtick', [])
-set( gca, 'ytick', [])
-
+rvPlot = subplot(2,2,2);
+theRV = pcolor(x, y, rv);
+theRV.EdgeColor = 'none';
+axis(rvPlot, 'equal', 'tight');
+rvPlot.Title.String = 'Relative vorticity';
+rvPlot.XTick = [];
+rvPlot.YTick = [];
+colormap(rvPlot,gray(1024))
 
 %%%%%%%%%%%%%%%%%%%%%
 %
@@ -82,23 +75,21 @@ set( gca, 'ytick', [])
 %
 %%%%%%%%%%%%%%%%%%%%%%
 
-
-subplot(2,2,3)
-
 speed = sqrt( u.*u + v.*v );
-
 u = u./speed;
 v = v./speed;
-
 stride=20;
 
-pcolor(x, y, speed), axis equal tight, shading interp
+speedPlot = subplot(2,2,3);
+theSpeedRaster = pcolor(x, y, speed);
+theSpeedRaster.EdgeColor = 'none';
 hold on
-quiver(x(1:stride:end),y(1:stride:end),u(1:stride:end,1:stride:end),v(1:stride:end,1:stride:end), 'black')
-title('Snapshot of the Eulerian Velocity Field')
-set( gca, 'xtick', [])
-set( gca, 'ytick', [])
-
+theSpeedQuiver = quiver(x(1:stride:end),y(1:stride:end),u(1:stride:end,1:stride:end),v(1:stride:end,1:stride:end), 'black');
+hold off
+speedPlot.Title.String = 'Snapshot of the Eulerian Velocity Field';
+speedPlot.XTick = [];
+speedPlot.YTick = [];
+%axis(speedPlot, 'equal', 'tight');
 
 %%%%%%%%%%%%%%%%%%%%%
 %
@@ -106,7 +97,7 @@ set( gca, 'ytick', [])
 %
 %%%%%%%%%%%%%%%%%%%%%%
 
-subplot(2,2,4)
+energyPlot = subplot(2,2,4)
 
 [kMag, energyMag] = EnergySpectrumFromSSH( sshFD, k, l, g, f0, length_scale );
 
@@ -151,13 +142,13 @@ if (energyEndIndex > energyStartIndex)
 end
 
 title('Eulerian Energy Spectrum')
-xlim([min(abs(k)) max(abs(k))])
+xlim([min(abs(k(find(abs(k)>0)))) max(abs(k))])
 ylim([energyMag(enstrophyEndIndex)/100 10*max(energyMag)])
 
 set( gca, 'xtick', [])
 set( gca, 'ytick', [])
 
-packcols(2,2)
+%packcols(2,2)
 
 ScaleFactor = 4;
 % print(sprintf('-r%d',72*ScaleFactor), '-dpng', output );
