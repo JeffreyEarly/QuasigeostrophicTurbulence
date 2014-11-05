@@ -1,8 +1,8 @@
-day = 1;
+day = 1000;
 
 addpath('/Volumes/Music/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/QGTurbulence_3@x2.nc';
+file = '/Users/jearly/Desktop/QGTurbulence_4.nc';
 output = '/Users/jearly/Desktop/FourPanel.png';
 
 [x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');
@@ -32,15 +32,15 @@ t = t/86400;
 
 timeIndex = find( t <= day, 1, 'last');
 %
-timeIndex = 7
+% timeIndex = 47
 [u, v, rv, ssh, sshFD, force, k, l, f0] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'force', 'k', 'l', 'f0');
 %[u, v, rv, ssh, sshFD, k, l, f0] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'k', 'l', 'f0');
 
 
-% % figure
-% % theForce = pcolor(x, y, force);
-% % theForce.EdgeColor = 'none';
-% % fprintf('max ssh: %g, max force: %g, max rv: %g\n', max(max(ssh)), max(max(force)), max(max(rv)))
+figure
+theForce = pcolor(x, y, force);
+theForce.EdgeColor = 'none';
+fprintf('max ssh: %g, max force: %g, max rv: %g\n', max(max(ssh)), max(max(force)), max(max(rv)))
 
 theFigure = figure('Position', [50 50 1000 1000]);
 theFigure.PaperPositionMode = 'auto';
