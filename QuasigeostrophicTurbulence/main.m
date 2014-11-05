@@ -12,8 +12,8 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulence.nc"];
-		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGTurbulence.nc"];
+		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGMonopole.nc"];
+		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGMonopole.nc"];
 		
 		GLFloat domainWidth = 100e3; // m
 		NSUInteger nPoints = 256;
@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
 		qg.shouldUseBeta = NO;
 		qg.shouldUseSVV = YES;
 		qg.shouldAntiAlias = NO;
-		qg.shouldForce = YES;
+		qg.shouldForce = NO;
 		qg.forcingFraction = 16;
 		qg.forcingWidth = 1;
         qg.f_zeta = 10;
@@ -42,9 +42,16 @@ int main(int argc, const char * argv[]) {
         qg.outputFile = outputFile;
         qg.shouldAdvectFloats = NO;
         qg.shouldAdvectTracer = NO;
-        qg.outputInterval = 10*86400.;
+        qg.outputInterval = 86400./20.;
         
-        [qg runSimulationToTime: 700*86400];
+        GLFloat amplitude = .15/qg.N_QG;
+        GLFloat length = 5e3/qg.L_QG;
+        GLFunction *x = [GLFunction functionOfRealTypeFromDimension: qg.dimensions[0] withDimensions: qg.dimensions forEquation: equation];
+        GLFunction *y = [GLFunction functionOfRealTypeFromDimension: qg.dimensions[1] withDimensions: qg.dimensions forEquation: equation];
+        GLFunction *r2 = [[x times: x] plus: [y times: y]];
+        qg.ssh = [[[r2 times: @(-1.0/(length*length))] exponentiate] times: @(amplitude)];
+        
+        [qg runSimulationToTime: 10*86400];
 	}
     return 0;
 }

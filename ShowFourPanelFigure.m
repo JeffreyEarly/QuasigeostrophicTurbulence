@@ -1,8 +1,8 @@
-day = 20000;
+day = 1;
 
 addpath('/Volumes/Music/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/QGTurbulenceTest_3.nc';
+file = '/Users/jearly/Desktop/QGTurbulence_3@x2.nc';
 output = '/Users/jearly/Desktop/FourPanel.png';
 
 [x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');
@@ -20,6 +20,7 @@ f_zeta = ncreadatt(file, '/', 'f_zeta');
 latitude = ncreadatt(file, '/', 'latitude');
 k_max = ncreadatt(file, '/', 'max_resolved_wavenumber');
 r = ncreadatt(file, '/', 'r');
+g = 9.81;
 
 if (k_alpha > k_r)
 	k_damp = k_alpha;
@@ -30,9 +31,16 @@ end
 t = t/86400;
 
 timeIndex = find( t <= day, 1, 'last');
+%
+timeIndex = 7
+[u, v, rv, ssh, sshFD, force, k, l, f0] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'force', 'k', 'l', 'f0');
+%[u, v, rv, ssh, sshFD, k, l, f0] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'k', 'l', 'f0');
 
-[u, v, rv, ssh, sshFD, k, l] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'k', 'l');
 
+% % figure
+% % theForce = pcolor(x, y, force);
+% % theForce.EdgeColor = 'none';
+% % fprintf('max ssh: %g, max force: %g, max rv: %g\n', max(max(ssh)), max(max(force)), max(max(rv)))
 
 theFigure = figure('Position', [50 50 1000 1000]);
 theFigure.PaperPositionMode = 'auto';
@@ -91,13 +99,15 @@ speedPlot.XTick = [];
 speedPlot.YTick = [];
 %axis(speedPlot, 'equal', 'tight');
 
+fprintf('max ssh: %g, max rv: %g, max speed: %g\n', max(max(ssh)), max(max(rv)), max(max(speed)))
+
 %%%%%%%%%%%%%%%%%%%%%
 %
 % Energy Plot
 %
 %%%%%%%%%%%%%%%%%%%%%%
 
-energyPlot = subplot(2,2,4)
+energyPlot = subplot(2,2,4);
 
 [kMag, energyMag] = EnergySpectrumFromSSH( sshFD, k, l, g, f0, length_scale );
 
