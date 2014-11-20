@@ -1,4 +1,4 @@
-day = 10000;
+day = 15000;
 
 addpath('/Volumes/Music/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
