@@ -1,6 +1,6 @@
-day = 10000;
+day = 15000;
 
-addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
+addpath('/Volumes/Music/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
 file = '/Users/jearly/Desktop/QGTurbulence@x4.nc';
 output = '/Users/jearly/Desktop/FourPanel.png';
