@@ -1,8 +1,8 @@
 day = 15000;
 
-addpath('/Volumes/Music/Dropbox/Documents/Matlab/jlab')
+addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/QGTurbulence@x4.nc';
+file = '/Users/jearly/Desktop/TurbulenceSpinUp.nc';
 output = '/Users/jearly/Desktop/FourPanel.png';
 
 [x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');

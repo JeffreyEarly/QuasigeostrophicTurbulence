@@ -12,11 +12,10 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		NSURL *restartFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGMonopole.nc"];
-		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"QGMonopole.nc"];
+		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"TurbulenceSpinUp.nc"];
 		
 		GLFloat domainWidth = 100e3; // m
-		NSUInteger nPoints = 256;
+		NSUInteger nPoints = 2048;
 		NSUInteger aspectRatio = 1;
 		
 		GLDimension *xDim = [[GLDimension alloc] initDimensionWithGrid: kGLPeriodicGrid nPoints:nPoints domainMin:-domainWidth/2.0 length:domainWidth];
@@ -26,12 +25,11 @@ int main(int argc, const char * argv[]) {
 		
 		GLEquation *equation = [[GLEquation alloc] init];
 		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithDimensions: @[xDim, yDim] depth: 0.80 latitude: 24.0 equation: equation];
-		//Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartFile resolutionDoubling:YES equation: equation];
 		qg.shouldUseBeta = NO;
 		qg.shouldUseSVV = YES;
-		qg.shouldAntiAlias = NO;
-		qg.shouldForce = NO;
-		qg.forcingFraction = 16;
+		qg.shouldAntiAlias = YES;
+		qg.shouldForce = YES;
+		qg.forcingFraction = 32;
 		qg.forcingWidth = 1;
         qg.f_zeta = 10;
         qg.forcingDecorrelationTime = HUGE_VAL;
@@ -40,18 +38,11 @@ int main(int argc, const char * argv[]) {
         
         
         qg.outputFile = outputFile;
-        qg.shouldAdvectFloats = NO;
+        qg.shouldAdvectFloats = YES;
         qg.shouldAdvectTracer = NO;
-        qg.outputInterval = 86400./20.;
+        qg.outputInterval = 86400.;
         
-        GLFloat amplitude = .15/qg.N_QG;
-        GLFloat length = 5e3/qg.L_QG;
-        GLFunction *x = [GLFunction functionOfRealTypeFromDimension: qg.dimensions[0] withDimensions: qg.dimensions forEquation: equation];
-        GLFunction *y = [GLFunction functionOfRealTypeFromDimension: qg.dimensions[1] withDimensions: qg.dimensions forEquation: equation];
-        GLFunction *r2 = [[x times: x] plus: [y times: y]];
-        qg.ssh = [[[r2 times: @(-1.0/(length*length))] exponentiate] times: @(amplitude)];
-        
-        [qg runSimulationToTime: 10*86400];
+        [qg runSimulationToTime: 100*86400];
 	}
     return 0;
 }
