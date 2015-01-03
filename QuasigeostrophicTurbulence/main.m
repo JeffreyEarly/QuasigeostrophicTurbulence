@@ -15,7 +15,7 @@ int main(int argc, const char * argv[]) {
 		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"TurbulenceSpinUp.nc"];
 		
 		GLFloat domainWidth = 100e3; // m
-		NSUInteger nPoints = 2048;
+		NSUInteger nPoints = 1024;
 		NSUInteger aspectRatio = 1;
 		
 		GLDimension *xDim = [[GLDimension alloc] initDimensionWithGrid: kGLPeriodicGrid nPoints:nPoints domainMin:-domainWidth/2.0 length:domainWidth];
@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
         qg.outputFile = outputFile;
         qg.shouldAdvectFloats = YES;
         qg.shouldAdvectTracer = NO;
-        qg.outputInterval = 86400.;
+        qg.outputInterval = 86400./8.;
         
         [qg runSimulationToTime: 100*86400];
 	}
