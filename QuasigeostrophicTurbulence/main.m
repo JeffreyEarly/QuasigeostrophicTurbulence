@@ -12,7 +12,8 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"TurbulenceSpinUp.nc"];
+		//NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"TurbulenceSpinUp.nc"];
+		NSURL *outputFile = [NSURL fileURLWithPath: @"/Volumes/Data/TurbulenceSpinUp.nc"];
 		
 		GLFloat domainWidth = 100e3; // m
 		NSUInteger nPoints = 1024;

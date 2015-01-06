@@ -9,8 +9,8 @@
 
 addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/TurbulenceSpinUp.nc';
-FramesFolder ='/Users/jearly/Desktop/TurbulenceSpinUpFrames';
+file = '/Volumes/Data/TurbulenceSpinUp.nc';
+FramesFolder ='/Volumes/Data/TurbulenceSpinUpFrames';
 startIndex = 1;
 day = 1000;
 ScaleFactor = 5;
@@ -84,7 +84,7 @@ enstrophyEndIndex = find( kMag < k_nu, 1, 'last')-1;
 %
 
 % stride=1, size=3 works well for 512x128
-stride = 4;
+stride = 8;
 floatSize = 3.5;
 
 x_float = double(ncread(file, 'x-float'));
