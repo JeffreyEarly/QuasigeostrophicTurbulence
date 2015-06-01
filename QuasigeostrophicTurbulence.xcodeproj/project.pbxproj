@@ -7,12 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		817A3C6E1B1CCBC900065690 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 817A3C6D1B1CCBC900065690 /* main.m */; };
+		817A3C721B1CD17000065690 /* GLNumericalModelingKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8187739719E48A0A007E5DA3 /* GLNumericalModelingKit.dylib */; };
+		817A3C731B1CD17400065690 /* GLOceanKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8187739919E48A7C007E5DA3 /* GLOceanKit.dylib */; };
 		8187739119E4893D007E5DA3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8187739019E4893D007E5DA3 /* main.m */; };
 		8187739819E48A0A007E5DA3 /* GLNumericalModelingKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8187739719E48A0A007E5DA3 /* GLNumericalModelingKit.dylib */; };
 		8187739A19E48A7C007E5DA3 /* GLOceanKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8187739919E48A7C007E5DA3 /* GLOceanKit.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		817A3C691B1CCBC900065690 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		8187738B19E4893D007E5DA3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -25,6 +37,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		817A3C6B1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = QuasigeostrophicTurbulenceWithRestart; sourceTree = BUILT_PRODUCTS_DIR; };
+		817A3C6D1B1CCBC900065690 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8187738D19E4893D007E5DA3 /* QuasigeostrophicTurbulence */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = QuasigeostrophicTurbulence; sourceTree = BUILT_PRODUCTS_DIR; };
 		8187739019E4893D007E5DA3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8187739719E48A0A007E5DA3 /* GLNumericalModelingKit.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = GLNumericalModelingKit.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +46,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		817A3C681B1CCBC900065690 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				817A3C731B1CD17400065690 /* GLOceanKit.dylib in Frameworks */,
+				817A3C721B1CD17000065690 /* GLNumericalModelingKit.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8187738A19E4893D007E5DA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,12 +67,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		817A3C6C1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */ = {
+			isa = PBXGroup;
+			children = (
+				817A3C6D1B1CCBC900065690 /* main.m */,
+			);
+			path = QuasigeostrophicTurbulenceWithRestart;
+			sourceTree = "<group>";
+		};
 		8187738419E4893D007E5DA3 = {
 			isa = PBXGroup;
 			children = (
 				8187739919E48A7C007E5DA3 /* GLOceanKit.dylib */,
 				8187739719E48A0A007E5DA3 /* GLNumericalModelingKit.dylib */,
 				8187738F19E4893D007E5DA3 /* QuasigeostrophicTurbulence */,
+				817A3C6C1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */,
 				8187738E19E4893D007E5DA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				8187738D19E4893D007E5DA3 /* QuasigeostrophicTurbulence */,
+				817A3C6B1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +106,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		817A3C6A1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 817A3C711B1CCBC900065690 /* Build configuration list for PBXNativeTarget "QuasigeostrophicTurbulenceWithRestart" */;
+			buildPhases = (
+				817A3C671B1CCBC900065690 /* Sources */,
+				817A3C681B1CCBC900065690 /* Frameworks */,
+				817A3C691B1CCBC900065690 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuasigeostrophicTurbulenceWithRestart;
+			productName = QuasigeostrophicTurbulenceWithRestart;
+			productReference = 817A3C6B1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */;
+			productType = "com.apple.product-type.tool";
+		};
 		8187738C19E4893D007E5DA3 /* QuasigeostrophicTurbulence */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8187739419E4893D007E5DA3 /* Build configuration list for PBXNativeTarget "QuasigeostrophicTurbulence" */;
@@ -99,6 +149,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Jeffrey J. Early";
 				TargetAttributes = {
+					817A3C6A1B1CCBC900065690 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 					8187738C19E4893D007E5DA3 = {
 						CreatedOnToolsVersion = 6.1;
 					};
@@ -117,11 +170,20 @@
 			projectRoot = "";
 			targets = (
 				8187738C19E4893D007E5DA3 /* QuasigeostrophicTurbulence */,
+				817A3C6A1B1CCBC900065690 /* QuasigeostrophicTurbulenceWithRestart */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		817A3C671B1CCBC900065690 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				817A3C6E1B1CCBC900065690 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8187738919E4893D007E5DA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,6 +195,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		817A3C6F1B1CCBC900065690 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		817A3C701B1CCBC900065690 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8187739219E4893D007E5DA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -242,6 +328,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		817A3C711B1CCBC900065690 /* Build configuration list for PBXNativeTarget "QuasigeostrophicTurbulenceWithRestart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				817A3C6F1B1CCBC900065690 /* Debug */,
+				817A3C701B1CCBC900065690 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		8187738819E4893D007E5DA3 /* Build configuration list for PBXProject "QuasigeostrophicTurbulence" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -2,7 +2,7 @@ day = 15000;
 
 addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
 addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/TurbulenceSpinUp.nc';
+file = '/Volumes/Data/Isotropy/TurbulenceIsotropic@x2.nc';
 output = '/Users/jearly/Desktop/FourPanel.png';
 
 [x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');
@@ -37,10 +37,10 @@ timeIndex = find( t <= day, 1, 'last');
 %[u, v, rv, ssh, sshFD, k, l, f0] = FieldsFromTurbulenceFile( file, timeIndex, 'u', 'v', 'rv', 'ssh', 'ssh_fd', 'k', 'l', 'f0');
 
 
-figure
-theForce = pcolor(x, y, force);
-theForce.EdgeColor = 'none';
-fprintf('max ssh: %g, max force: %g, max rv: %g\n', max(max(ssh)), max(max(force)), max(max(rv/f0)))
+% figure
+% theForce = pcolor(x, y, force);
+% theForce.EdgeColor = 'none';
+% fprintf('max ssh: %g, max force: %g, max rv: %g\n', max(max(ssh)), max(max(force)), max(max(rv/f0)))
  
 theFigure = figure('Position', [50 50 1000 1000]);
 theFigure.PaperPositionMode = 'auto';
@@ -138,7 +138,7 @@ xl = 10^( log10(kMag(enstrophyStartIndex)) + (log10(kMag(enstrophyEndIndex))-log
 yl = (10^0.5)*enstrophyCoeff*xl^(-3);
 text(double(xl), double(yl), 'k^{-3}') 
 
-(log10(energyMag(enstrophyEndIndex))-log10(energyMag(enstrophyStartIndex)))/(log10(kMag(enstrophyEndIndex))-log10(kMag(enstrophyStartIndex)))
+enstrophySlope = (log10(energyMag(enstrophyEndIndex))-log10(energyMag(enstrophyStartIndex)))/(log10(kMag(enstrophyEndIndex))-log10(kMag(enstrophyStartIndex)))
 
 % This coefficient will place a k^-5/3 line just above the energy cascade region
 if (energyEndIndex > energyStartIndex)
