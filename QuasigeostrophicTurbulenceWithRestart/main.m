@@ -46,7 +46,7 @@ int main(int argc, const char * argv[]) {
 			qgSpinup.shouldForce = YES;
 			qgSpinup.forcingFraction = 4;
 			qgSpinup.forcingWidth = 1;
-			qgSpinup.f_zeta = 1.0;
+			qgSpinup.f_zeta = 0.5;
 			qgSpinup.forcingDecorrelationTime = HUGE_VAL;
 			qgSpinup.thermalDampingFraction = 4.0;
 			qgSpinup.frictionalDampingFraction = 0.0; //8.0;
@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]) {
 			qgSpinup.shouldAdvectTracer = NO;
 			qgSpinup.outputInterval = 100.*86400.;
 			
-			[qgSpinup runSimulationToTime: 15001.0*86400.0];
+			[qgSpinup runSimulationToTime: 30001.0*86400.0];
 		}
 		
 		
@@ -70,9 +70,9 @@ int main(int argc, const char * argv[]) {
 			qgSpinup.outputFile = restartURLx2;
 			qgSpinup.shouldAdvectFloats = NO;
 			qgSpinup.shouldAdvectTracer = NO;
-			qgSpinup.outputInterval = 10.*86400.;
+			qgSpinup.outputInterval = 100.*86400.;
 			
-			GLFloat maxTime = 1001.0*86400.0;
+			GLFloat maxTime = 5001.0*86400.0;
 			[qgSpinup runSimulationToTime: maxTime];
 		}
 		
