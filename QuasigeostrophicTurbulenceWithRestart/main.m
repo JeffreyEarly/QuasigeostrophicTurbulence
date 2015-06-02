@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, ExperimentType) {
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 		ExperimentType experiment = kIsotropicExperimentType;
-		GLFloat domainWidth = 10000e3; // m
+		GLFloat domainWidth = 2500e3; // m
 		NSUInteger nPoints = 256;
 		NSUInteger aspectRatio = 1;
 		
@@ -44,19 +44,19 @@ int main(int argc, const char * argv[]) {
 			qgSpinup.shouldUseSVV = YES;
 			qgSpinup.shouldAntiAlias = YES;
 			qgSpinup.shouldForce = YES;
-			qgSpinup.forcingFraction = 2; // Try chaging this to say, 12---it's a very dramatic qualitative difference
+			qgSpinup.forcingFraction = 4;
 			qgSpinup.forcingWidth = 1;
-			qgSpinup.f_zeta = 0.5;
+			qgSpinup.f_zeta = 1.0;
 			qgSpinup.forcingDecorrelationTime = HUGE_VAL;
-			qgSpinup.thermalDampingFraction = 0.0;
-			qgSpinup.frictionalDampingFraction = 2.0;
+			qgSpinup.thermalDampingFraction = 4.0;
+			qgSpinup.frictionalDampingFraction = 0.0; //8.0;
 			
 			qgSpinup.outputFile = restartURLx1;
 			qgSpinup.shouldAdvectFloats = NO;
 			qgSpinup.shouldAdvectTracer = NO;
 			qgSpinup.outputInterval = 100.*86400.;
 			
-			[qgSpinup runSimulationToTime: 100000.0*86400.0];
+			[qgSpinup runSimulationToTime: 15001.0*86400.0];
 		}
 		
 		
@@ -64,19 +64,17 @@ int main(int argc, const char * argv[]) {
 		NSURL *restartURLx2 = [baseFolder URLByAppendingPathComponent: [baseName stringByAppendingString: @"@x2.nc"]];
 		if (![fileManager fileExistsAtPath: restartURLx2.path])
 		{
-			Quasigeostrophy2D *qgSpinup = [[Quasigeostrophy2D alloc] initWithFile:restartURLx1 resolutionDoubling:NO equation: equation];
+			Quasigeostrophy2D *qgSpinup = [[Quasigeostrophy2D alloc] initWithFile:restartURLx1 resolutionDoubling:YES equation: equation];
 			qgSpinup.shouldForce = YES;
 			
 			qgSpinup.outputFile = restartURLx2;
 			qgSpinup.shouldAdvectFloats = NO;
 			qgSpinup.shouldAdvectTracer = NO;
-			qgSpinup.outputInterval = 100*86400.;
+			qgSpinup.outputInterval = 10.*86400.;
 			
-			GLFloat maxTime = 50000.0*86400.0;
+			GLFloat maxTime = 1001.0*86400.0;
 			[qgSpinup runSimulationToTime: maxTime];
 		}
-		
-		return 0;
 		
 		NSURL *restartURLx4 = [baseFolder URLByAppendingPathComponent: [baseName stringByAppendingString: @"@x4.nc"]];
 		if (![fileManager fileExistsAtPath: restartURLx4.path])
@@ -87,12 +85,27 @@ int main(int argc, const char * argv[]) {
 			qgSpinup.outputFile = restartURLx4;
 			qgSpinup.shouldAdvectFloats = NO;
 			qgSpinup.shouldAdvectTracer = NO;
-			qgSpinup.outputInterval = 10*86400.;
+			qgSpinup.outputInterval = 10.*86400.;
 			
-			[qgSpinup runSimulationToTime: 31*86400];
+			[qgSpinup runSimulationToTime: 1001.*86400.];
 		}
 		
-		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartURLx4 resolutionDoubling:NO equation: equation];
+		NSURL *restartURLx8 = [baseFolder URLByAppendingPathComponent: [baseName stringByAppendingString: @"@x8.nc"]];
+		if (![fileManager fileExistsAtPath: restartURLx8.path])
+		{
+			Quasigeostrophy2D *qgSpinup = [[Quasigeostrophy2D alloc] initWithFile:restartURLx4 resolutionDoubling:YES equation: equation];
+			qgSpinup.shouldForce = YES;
+			
+			qgSpinup.outputFile = restartURLx8;
+			qgSpinup.shouldAdvectFloats = NO;
+			qgSpinup.shouldAdvectTracer = NO;
+			qgSpinup.outputInterval = 1.*86400.;
+			
+			[qgSpinup runSimulationToTime: 101.*86400.];
+		}
+		
+		return 0;
+		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartURLx8 resolutionDoubling:NO equation: equation];
 		qg.shouldForce = YES;
 		
 		qg.outputFile = [baseFolder URLByAppendingPathComponent: [baseName stringByAppendingString: @".nc"]];
