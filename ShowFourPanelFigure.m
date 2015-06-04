@@ -1,8 +1,8 @@
 day = 100000;
 
-addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
-addpath('../GLOceanKit/Matlab/')
-file = '/Volumes/Data/Isotropy/TurbulenceIsotropic@x4.nc';
+addpath(genpath('/Users/jearly/Documents/jlab'))
+addpath(genpath('../GLOceanKit/Matlab/'))
+file = '/Users/jearly/Desktop/Isotropy/TurbulenceIsotropic.nc';
 output = '/Users/jearly/Desktop/FourPanel.png';
 
 [x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');

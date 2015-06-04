@@ -1,6 +1,6 @@
-addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
-addpath('../GLOceanKit/Matlab/')
-basename = '/Volumes/Data/Isotropy/TurbulenceIsotropic';
+addpath(genpath('/Users/jearly/Documents/jlab'))
+addpath(genpath('../GLOceanKit/Matlab/'))
+basename = '/Users/jearly/Desktop/Isotropy/TurbulenceIsotropic';
 
 file = sprintf('%s@x1.nc',basename);
 
