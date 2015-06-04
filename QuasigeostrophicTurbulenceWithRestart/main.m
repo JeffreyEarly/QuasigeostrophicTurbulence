@@ -107,7 +107,20 @@ int main(int argc, const char * argv[]) {
 		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithFile:restartURLx4 resolutionDoubling:NO equation: equation];
 		qg.shouldForce = YES;
 		
+		GLDimension *xDimND = qg.dimensions[0];
+		GLDimension *yDimND = qg.dimensions[1];
+		NSUInteger floatStride = 32;
+		GLDimension *xFloatDim = [[GLDimension alloc] initDimensionWithGrid: xDimND.gridType nPoints: xDimND.nPoints/floatStride domainMin: xDimND.domainMin length:xDimND.domainLength];
+		xFloatDim.name = @"x-float";
+		GLDimension *yFloatDim = [[GLDimension alloc] initDimensionWithGrid: yDimND.gridType nPoints: yDimND.nPoints/floatStride domainMin: yDimND.domainMin length:yDimND.domainLength];
+		yFloatDim.name = @"y-float";
+		
+		NSArray *floatDims = @[xFloatDim, yFloatDim];
+		qg.xPosition = [GLFunction functionOfRealTypeFromDimension: xFloatDim withDimensions: floatDims forEquation: qg.equation];
+		qg.yPosition = [GLFunction functionOfRealTypeFromDimension: yFloatDim withDimensions: floatDims forEquation: qg.equation];
+		
 		qg.outputFile = [baseFolder URLByAppendingPathComponent: [baseName stringByAppendingString: @".nc"]];
+		qg.shouldWriteSSH = NO;
 		qg.shouldAdvectFloats = YES;
 		qg.shouldAdvectTracer = NO;
 		qg.outputInterval = 86400./4.;
