@@ -1,5 +1,5 @@
 addpath(genpath('../GLOceanKit/Matlab'));
-file = '/Users/jearly/Dropbox/Documents/Projects/ForcedDissipativeQGTurbulence/Experiment_06/Experiment6Trajectories.mat';
+file = '/Users/jearly/Dropbox/Documents/Projects/ForcedDissipativeQGTurbulence/Experiment_07/Experiment7Trajectories1400.mat';
 load(file)
 x = xpos;
 y = ypos;
