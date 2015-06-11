@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
 		NSUInteger aspectRatio = 1;
 		
 		//NSURL *baseFolder = [NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]];
-		NSURL *baseFolder = [NSURL fileURLWithPath: @"/Users/jearly/Desktop/Isotropy/"];
+		NSURL *baseFolder = [NSURL fileURLWithPath: @"/Volumes/Data/Isotropy/"];
 		NSString *baseName = experiment == kIsotropicExperimentType ? @"TurbulenceIsotropic" : @"TurbulenceAnisotropic";
 		NSFileManager *fileManager = [[NSFileManager alloc] init];
 		
@@ -64,7 +64,7 @@ int main(int argc, const char * argv[]) {
 		NSURL *restartURLx2 = [baseFolder URLByAppendingPathComponent: [baseName stringByAppendingString: @"@x2.nc"]];
 		if (![fileManager fileExistsAtPath: restartURLx2.path])
 		{
-			Quasigeostrophy2D *qgSpinup = [[Quasigeostrophy2D alloc] initWithFile:restartURLx1 resolutionDoubling:NO equation: equation];
+			Quasigeostrophy2D *qgSpinup = [[Quasigeostrophy2D alloc] initWithFile:restartURLx1 resolutionDoubling:YES equation: equation];
 			qgSpinup.shouldForce = YES;
 			
 			qgSpinup.outputFile = restartURLx2;
@@ -72,7 +72,7 @@ int main(int argc, const char * argv[]) {
 			qgSpinup.shouldAdvectTracer = NO;
 			qgSpinup.outputInterval = 100.*86400.;
 			
-			GLFloat maxTime = 25001.0*86400.0;
+			GLFloat maxTime = 10001.0*86400.0;
 			[qgSpinup runSimulationToTime: maxTime];
 		}
 		
