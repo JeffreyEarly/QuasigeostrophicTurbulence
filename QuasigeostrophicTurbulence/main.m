@@ -12,8 +12,8 @@
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-		NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"AnisotropicTurbulenceSpinUpModerateForcing.nc"];
-//		NSURL *outputFile = [NSURL fileURLWithPath: @"/Volumes/Data/TurbulenceSpinUp.nc"];
+		//NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"TurbulenceSpinUp.nc"];
+		NSURL *outputFile = [NSURL fileURLWithPath: @"/Volumes/RadiativeTr/AnisotropicTurbulenceSpinUp.nc"];
 		
 		GLFloat domainWidth = (2*M_PI)*2*611e3; // m
 		NSUInteger nPoints = 1024;
@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
 		qg.shouldForce = YES;
 		qg.forcingFraction = 8;
 		qg.forcingWidth = 1;
-        qg.f_zeta = 0.01;
+        qg.f_zeta = .1;
         qg.forcingDecorrelationTime = HUGE_VAL;
 		qg.thermalDampingFraction = 0.0;
 		qg.frictionalDampingFraction = 3.0;
@@ -41,7 +41,7 @@ int main(int argc, const char * argv[]) {
         qg.outputFile = outputFile;
         qg.shouldAdvectFloats = YES;
         qg.shouldAdvectTracer = NO;
-        qg.outputInterval = 86400.;
+        qg.outputInterval = 86400./2.;
         
         [qg runSimulationToTime: 2500*86400];
 	}

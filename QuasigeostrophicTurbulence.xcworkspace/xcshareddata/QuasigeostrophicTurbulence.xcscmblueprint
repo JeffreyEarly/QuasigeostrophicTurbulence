@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "154D4F7A294BCC1F7F9FE64AFE8A6C29AC84EB3B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "154D4F7A294BCC1F7F9FE64AFE8A6C29AC84EB3B" : 0,
+    "A667B81420130A7CF8C16D7DC1622CE51619361A" : 0,
+    "13B78EA659372F5FA2535D85FF02546CFE6B6BF0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "26C562E3-226D-48B1-904B-F49277C8268A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "154D4F7A294BCC1F7F9FE64AFE8A6C29AC84EB3B" : "QuasigeostrophicTurbulence\/",
+    "A667B81420130A7CF8C16D7DC1622CE51619361A" : "GLOceanKit\/",
+    "13B78EA659372F5FA2535D85FF02546CFE6B6BF0" : "GLNumericalModelingKit\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "QuasigeostrophicTurbulence",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "QuasigeostrophicTurbulence.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JeffreyEarly\/GLNumericalModelingKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "13B78EA659372F5FA2535D85FF02546CFE6B6BF0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JeffreyEarly\/QuasigeostrophicTurbulence.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "154D4F7A294BCC1F7F9FE64AFE8A6C29AC84EB3B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JeffreyEarly\/GLOceanKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A667B81420130A7CF8C16D7DC1622CE51619361A"
+    }
+  ]
+}

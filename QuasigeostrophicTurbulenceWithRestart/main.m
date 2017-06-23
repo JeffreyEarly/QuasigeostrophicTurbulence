@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
 		NSUInteger aspectRatio = 1;
 		
 		//NSURL *baseFolder = [NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]];
-		NSURL *baseFolder = [NSURL fileURLWithPath: @"/Volumes/Data/Isotropy/"];
+		NSURL *baseFolder = [NSURL fileURLWithPath: @"/Volumes/640GB/Isotropy/"];
 		NSString *baseName = experiment == kIsotropicExperimentType ? @"TurbulenceIsotropic" : @"TurbulenceAnisotropic";
 		NSFileManager *fileManager = [[NSFileManager alloc] init];
 		
