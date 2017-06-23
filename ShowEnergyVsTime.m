@@ -1,18 +1,25 @@
 % addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
 % addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/Isotropy/TurbulenceIsotropic.nc';
+file = '/Users/jearly/Desktop/AnisotropicTurbulenceSpinUpModerateForcing.nc';
 
 g = 9.81;
 L_R = ncreadatt(file, '/', 'length_scale');
 
 [x,y,t] = FieldsFromTurbulenceFile( file, 0, 'x', 'y', 't');
 
-totalEnergy = zeros(size(t));
-for timeIndex=1:100:length(t)
+n = 10;
+indices = 1:ceil(length(t)/n):length(t);
+if indices(end) ~= length(t)
+    indices(end+1)=length(t);
+end
+
+totalEnergy = zeros(length(indices));
+for iIndex=1:length(indices)
+    timeIndex = indices(iIndex);
     [sshFD, k, l, f0] = FieldsFromTurbulenceFile( file, timeIndex, 'ssh_fd', 'k', 'l', 'f0');
     [kMag, energyMag] = EnergySpectrumFromSSH( sshFD, k, l, g, f0, L_R );
-    totalEnergy(timeIndex) = trapz(kMag,energyMag);
+    totalEnergy(iIndex) = trapz(kMag,energyMag);
 end
 
 figure
-plot(t/86400,totalEnergy)
+plot(t(indices)/86400,totalEnergy)
