@@ -1,6 +1,6 @@
 % addpath('/Users/jearly/Dropbox/Documents/Matlab/jlab')
 % addpath('../GLOceanKit/Matlab/')
-file = '/Users/jearly/Desktop/AnisotropicTurbulenceSpinUpModerateForcing.nc';
+file = '/Volumes/OceanTransfer/AnisotropicExperiments/AnisotropicTurbulenceSpinUpModerateForcing.nc';
 
 g = 9.81;
 L_R = ncreadatt(file, '/', 'length_scale');

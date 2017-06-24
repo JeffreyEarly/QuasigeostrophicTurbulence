@@ -13,10 +13,10 @@
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 		//NSURL *outputFile = [[NSURL fileURLWithPath: [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) firstObject]] URLByAppendingPathComponent:@"TurbulenceSpinUp.nc"];
-		NSURL *outputFile = [NSURL fileURLWithPath: @"/Volumes/RadiativeTr/AnisotropicTurbulenceSpinUp.nc"];
+		NSURL *outputFile = [NSURL fileURLWithPath: @"/Volumes/OceanTransfer/AnisotropicExperiments/AnisotropicTurbulenceSpinUpModerateForcingThermalDamping.nc"];
 		
 		GLFloat domainWidth = (2*M_PI)*2*611e3; // m
-		NSUInteger nPoints = 1024;
+		NSUInteger nPoints = 256;
 		NSUInteger aspectRatio = 1;
 		
 		GLDimension *xDim = [[GLDimension alloc] initDimensionWithGrid: kGLPeriodicGrid nPoints:nPoints domainMin:-domainWidth/2.0 length:domainWidth];
@@ -27,23 +27,24 @@ int main(int argc, const char * argv[]) {
 		GLEquation *equation = [[GLEquation alloc] init];
 		Quasigeostrophy2D *qg = [[Quasigeostrophy2D alloc] initWithDimensions: @[xDim, yDim] depth: 0.80 latitude: 1.8 equation: equation];
 		qg.shouldUseBeta = YES;
+        qg.shouldUseVortexStretching = YES;
 		qg.shouldUseSVV = YES;
 		qg.shouldAntiAlias = YES;
 		qg.shouldForce = YES;
-		qg.forcingFraction = 8;
+        qg.forcingFraction = 2;
 		qg.forcingWidth = 1;
-        qg.f_zeta = .1;
+        qg.f_zeta = .01;
         qg.forcingDecorrelationTime = HUGE_VAL;
-		qg.thermalDampingFraction = 0.0;
+		qg.thermalDampingFraction = 3.0;
 		qg.frictionalDampingFraction = 3.0;
         
         
         qg.outputFile = outputFile;
-        qg.shouldAdvectFloats = YES;
+        qg.shouldAdvectFloats = NO;
         qg.shouldAdvectTracer = NO;
-        qg.outputInterval = 86400./2.;
+        qg.outputInterval = 86400.*10.;
         
-        [qg runSimulationToTime: 2500*86400];
+        [qg runSimulationToTime: 2000*86400];
 	}
     return 0;
 }
